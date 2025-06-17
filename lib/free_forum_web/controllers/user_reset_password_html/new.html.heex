@@ -1,0 +1,20 @@
+<div class="mx-auto max-w-sm">
+  <.header class="text-center">
+    Забыли пароль?
+    <:subtitle>Мы отправим ссылку для сброса на ваш электронный адрес</:subtitle>
+  </.header>
+
+  <.simple_form :let={f} for={@conn.params["user"]} as={:user} action={~p"/users/reset_password"}>
+    <.input field={f[:email]} type="email" placeholder="Адрес эл. почты" required />
+    <:actions>
+      <.button phx-disable-with="Отправляем..." class="w-full">
+        Отправить инструкцию по сбросу пароля
+      </.button>
+    </:actions>
+  </.simple_form>
+
+  <p class="text-center text-sm mt-4">
+    <.link href={~p"/users/register"}>Зарегистрироваться</.link>
+    | <.link href={~p"/users/log_in"}>Войти</.link>
+  </p>
+</div>

@@ -1,0 +1,110 @@
+<header class="px-4 sm:px-6 lg:px-8">
+  <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
+    <div class="flex items-center gap-4">
+      <.link href={~p"/topics"} class="flex flex-row items-center gap-4">
+        <img src={~p"/images/logo.svg"} width="36" />
+        <span class="text-xl font-funnel">FreeForum</span>
+      </.link>
+    </div>
+
+    <div>
+      <span class="text-3xl font-normal font-funnel">{assigns[:page_title]}</span>
+    </div>
+
+    <div class="relative inline-block text-left font-semibold">
+      <%= if @current_user do %>
+        <div>
+          <button
+            type="button"
+            phx-click={
+              JS.toggle(
+                to: "#dropdown",
+                in: {"ease-out duration-100", "opacity-0 scale-95", "opacity-100 scale-100"},
+                out: {"ease-in duration-75", "opacity-100 scale-100", "opacity-0 scale-95"}
+              )
+            }
+            class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50"
+          >
+            <.icon name="hero-user"/>
+            <span class="inline-block pl-1 pt-0.5">{@current_user.username}</span>
+            <%= if @current_user.vip do %>
+              <div class="flex pt-0.5">
+              <.icon name="hero-star-mini"/>
+              </div>
+            <% end %>
+          </button>
+        </div>
+
+        <div
+          id="dropdown"
+          class="hidden absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden"
+          role="menu"
+          tabindex="-1"
+        >
+          <div class="py-1" role="none">
+            <div class="flex flex-row">
+              <.link
+                href={~p"/users/settings"}
+                class="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:text-green-700"
+              >
+                <.icon name="hero-cog"/>
+                <span class="inline-block align-top pl-1 pt-0.5">Настройки</span>
+              </.link>
+            </div>
+
+            <div class="flex flex-row">
+              <.link
+                href={~p"/users/log_out"}
+                method="delete"
+                class="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:text-red-700"
+              >
+                <.icon name="hero-arrow-left-start-on-rectangle"/>
+                <span class="inline-block align-top pl-1 pt-0.5">Выйти</span>
+              </.link>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div>
+          <button
+            type="button"
+            class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50"
+            aria-expanded="true"
+            aria-haspopup="true"
+          >
+            <.link
+              href={~p"/users/log_in"}
+              class="block w-full px-4 text-left text-sm text-gray-700"
+            >
+              Войти
+            </.link>
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</header>
+
+<main class="px-4 py-10 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-3xl">
+    <.flash_group flash={@flash} />
+    {@inner_content}
+  </div>
+  <svg
+    viewBox="0 0 1480 957"
+    fill="white"
+    aria-hidden="true"
+    class="fixed inset-0 h-full w-full -z-10 opacity-40"
+    preserveAspectRatio="xMinYMid slice"
+  >
+    <path
+      d="M371.028 528.664C-169.369 304.988-545.754 149.198-1361.45 665.565l-182.58 792.025 3014.73 694.98 389.42-1689.25-96.18-22.171C1505.28 697.438 924.153 757.586 379.305 532.09l-8.277-3.426Z"
+      fill="#467750"
+    />
+    <path
+      d="M359.326 571.714C-104.765 215.795-428.003-32.102-1349.55 255.554l-282.3 1224.596 3047.04 722.01 312.24-1354.467C1411.25 1028.3 834.355 935.995 366.435 577.166l-7.109-5.452Z"
+      fill="#89c07e"
+      fill-opacity=".6"
+    />
+  </svg>
+</main>

@@ -1,0 +1,25 @@
+<.header>
+  <:subtitle>Что мы обсуждаем сегодня?</:subtitle>
+</.header>
+
+<.simple_form :let={f} for={@changeset} action={~p"/topics"} class="bg-none" multipart>
+  <.error :if={@changeset.action}>
+    Ой, что-то пошло не так! Пожалуйста, обратите внимание на ошибки ниже.
+  </.error>
+
+  <div class="flex gap-3" style="flex-direction: column">
+    <.input field={f[:title]} type="text" label="Заголовок" />
+    <.input field={f[:content]} type="textarea" label="Содержание" />
+    <%= if @current_user.vip do %>
+      <.input field={f[:vip]} type="checkbox" label="VIP обсуждение (только VIP участники смогут просматривать и комментировать это обсуждение)" />
+    <% end %>
+    <.input field={f[:attachment]} type="file" label="Приложить файл" />
+  </div>
+
+  <:actions>
+    <div class="flex w-full items-center justify-between">
+      <.back navigate={~p"/topics"}>Назад</.back>
+      <.button>Опубликовать</.button>
+    </div>
+  </:actions>
+</.simple_form>

@@ -1,0 +1,14 @@
+<div class="mx-auto max-w-sm">
+  <.header class="text-center">Подтверждение аккаунта</.header>
+
+  <.simple_form for={@conn.params["user"]} as={:user} action={~p"/users/confirm/#{@token}"}>
+    <:actions>
+      <.button class="w-full">Подтвердить мой аккаунт</.button>
+    </:actions>
+  </.simple_form>
+
+  <p class="text-center mt-4">
+    <.link href={~p"/users/register"}>Зарегистрироваться</.link>
+    | <.link href={~p"/users/log_in"}>Войти</.link>
+  </p>
+</div>

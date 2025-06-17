@@ -1,0 +1,29 @@
+<div class="mx-auto max-w-sm">
+  <.header class="text-center">
+    Сброс пароля
+  </.header>
+
+  <.simple_form :let={f} for={@changeset} action={~p"/users/reset_password/#{@token}"}>
+    <.error :if={@changeset.action}>
+      Ой, что-то пошло не так! Пожалуйста, обратите внимание на ошибки ниже.
+    </.error>
+
+    <.input field={f[:password]} type="password" label="Новый пароль" required />
+    <.input
+      field={f[:password_confirmation]}
+      type="password"
+      label="Подтвердите новый пароль"
+      required
+    />
+    <:actions>
+      <.button phx-disable-with="Производится сброс пароля..." class="w-full">
+        Сбросить пароль
+      </.button>
+    </:actions>
+  </.simple_form>
+
+  <p class="text-center text-sm mt-4">
+    <.link href={~p"/users/register"}>Зарегистрироваться</.link>
+    | <.link href={~p"/users/log_in"}>Войти</.link>
+  </p>
+</div>

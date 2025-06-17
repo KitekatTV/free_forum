@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Display&display=swap');
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.font-funnel {
+  font-family: "Funnel Display", sans-serif;
+  font-optical-sizing: auto;
+}

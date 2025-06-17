@@ -1,0 +1,26 @@
+<div class="mx-auto max-w-sm">
+  <.header class="text-center">
+    Создать новый аккаунт
+    <:subtitle>
+      Уже есть аккаунт?
+      <.link navigate={~p"/users/log_in"} class="font-semibold text-brand hover:underline">
+        Войти
+      </.link>
+      в свой аккаунт.
+    </:subtitle>
+  </.header>
+
+  <.simple_form :let={f} for={@changeset} action={~p"/users/register"}>
+    <.error :if={@changeset.action == :insert}>
+      Ой, что-то пошло не так! Пожалуйста, обратите внимание на ошибки ниже.
+    </.error>
+
+    <.input field={f[:email]} type="email" label="Адрес эл. почты" required />
+    <.input field={f[:username]} type="text" label="Имя пользователя" required />
+    <.input field={f[:password]} type="password" label="Пароль" required />
+
+    <:actions>
+      <.button phx-disable-with="Создаём аккаунт..." class="w-full">Создать аккаунт</.button>
+    </:actions>
+  </.simple_form>
+</div>

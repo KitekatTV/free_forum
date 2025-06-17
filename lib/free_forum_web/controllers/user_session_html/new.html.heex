@@ -1,0 +1,31 @@
+<div class="mx-auto max-w-sm">
+  <.header class="text-center">
+    Войти в аккаунт
+    <:subtitle>
+      Нет аккаунта?
+      <.link navigate={~p"/users/register"} class="font-semibold text-brand hover:underline">
+        Зарегистрироваться
+      </.link>
+      сейчас.
+    </:subtitle>
+  </.header>
+
+  <.simple_form :let={f} for={@conn.params["user"]} as={:user} action={~p"/users/log_in"}>
+    <.error :if={@error_message}>{@error_message}</.error>
+
+    <.input field={f[:email]} type="email" label="Адрес эл. почты" required />
+    <.input field={f[:password]} type="password" label="Пароль" required />
+
+    <:actions :let={f}>
+      <.input field={f[:remember_me]} type="checkbox" label="Остаться в системе" />
+      <.link href={~p"/users/reset_password"} class="text-sm font-semibold">
+        Забыли пароль?
+      </.link>
+    </:actions>
+    <:actions>
+      <.button phx-disable-with="Производится вход..." class="w-full">
+        Войти <span aria-hidden="true">→</span>
+      </.button>
+    </:actions>
+  </.simple_form>
+</div>
